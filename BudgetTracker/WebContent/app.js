@@ -173,8 +173,7 @@ var makeButton = function(){
     }
     else {
       $inputCost.css('background-color', 'rgba(255, 0, 0, 0.6)');
-      $inputCost.attr("value", "Only Integers");
-      $inputDescription.attr("placeholder", "Only Integers");
+      $inputCost.val("Only Integers");
     };
   });
 });
@@ -230,8 +229,7 @@ var editExpense = function(expense){
     }
     else {
       $inputCost.css('background-color', 'rgba(255, 0, 0, 0.6)');
-      $inputCost.attr("value", "Only Integers");
-      $inputDescription.attr("placeholder", "Only Integers");
+      $inputCost.val("Only Integers");
     };
 
   });
