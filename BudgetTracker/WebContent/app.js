@@ -157,6 +157,10 @@ var makeButton = function(){
     $submit.click(function(e){
       e.preventDefault();
 
+      var test = validateCost($inputCost.val());
+
+      if(test === true){
+
   var expense = {name : $inputName.val(), cost : $inputCost.val(), description : $inputDescription.val()};
   var stringifyExpense = JSON.stringify(expense);
     $.ajax({
@@ -166,6 +170,12 @@ var makeButton = function(){
         data: stringifyExpense,
         success: getExpenses
       });
+    }
+    else {
+      $inputCost.css('background-color', 'rgba(255, 0, 0, 0.6)');
+      $inputCost.attr("value", "Only Integers");
+      $inputDescription.attr("placeholder", "Only Integers");
+    };
   });
 });
 };
@@ -204,6 +214,10 @@ var editExpense = function(expense){
     $submit.click(function(e){
       e.preventDefault();
 
+      var test = validateCost($inputCost.val());
+
+      if(test === true){
+
   var editExpense = {name : $inputName.val(), cost : $inputCost.val(), description : $inputDescription.val()};
   var stringifyExpense = JSON.stringify(editExpense);
     $.ajax({
@@ -213,6 +227,13 @@ var editExpense = function(expense){
         data: stringifyExpense,
         success: getExpenses
       });
+    }
+    else {
+      $inputCost.css('background-color', 'rgba(255, 0, 0, 0.6)');
+      $inputCost.attr("value", "Only Integers");
+      $inputDescription.attr("placeholder", "Only Integers");
+    };
+
   });
 };
 
@@ -229,9 +250,15 @@ var makeNavbar = function(){
 
   $navbar.append($navbarLogo, $navbarHome);
   $('#navbar').append($navbar);
-  
+
   $navbarHome.click(function(){
 	  getExpenses();
   });
-  
+};
+
+var validateCost = function(cost){
+
+  var numChecker = /^(0|[1-9][0-9]*)$/
+
+  return numChecker.test(cost);
 };
